@@ -4,7 +4,7 @@
 # programa que receba os valores de X e Y e calcule a distância total que o pirata precisa
 # percorrer para chegar ao tesouro (soma de X e Y).
 # b. Conceito: Operadores aritméticos, variáveis.
-def coordernadas():
+def coordenadas():
     x = 10
     y = 27
 
@@ -14,5 +14,5 @@ def coordernadas():
 
 if __name__ == "__main__":
     print("Iniciando Arquivo")
-    print(coordernadas())
+    print(coordenadas())
     print("Finalizando Arquivo")
