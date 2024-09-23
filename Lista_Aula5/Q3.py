@@ -13,6 +13,7 @@ def advinhe():
             return "Seu animal favorito eh um cachorro neh"
         case 2:
             return "Seu animal favorito eh uma tartaruga"
+        
 if __name__ == "__main__":
     print("Iniciando Arquivo")
     print(advinhe())
