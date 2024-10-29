@@ -3,7 +3,7 @@
 # números repetidos no vetor VET e em que posições se encontram.
 
 VET = []
-posicoes = []
+posicoes = set()
 
 def receive_numbers():
     for _ in range(10):
@@ -12,12 +12,30 @@ def receive_numbers():
         if number in VET:
             for i, x in enumerate(VET):
                 if x == number:
-                    posicoes.append(i)
-            posicoes.append(len(VET))
+                    posicoes.add(i)
+            posicoes.add(len(VET))
         VET.append(number)
 
 receive_numbers()
 
 print(VET)
 print(posicoes)
-            
+
+# VET = []
+# posicoes = {}
+
+# def receive_numbers():
+#     for j in range(10):
+#         number = int(input("Enter a number: "))
+        
+#         if number in VET:
+#             if number in posicoes:
+#                 positions[number].append(j)
+#             else:
+#                 positions[number] = [VET.index(number), j]
+#         VET.append(number)
+
+# receive_numbers()
+
+# print("VET:", VET)
+# print("posicoes repetidas:", posicoes)
