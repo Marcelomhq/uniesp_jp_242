@@ -6,18 +6,18 @@
 from random import randint
 
 def dice(attempts):
-    results_list = [] #None
+    results_list = ['dado',2,False] #None
     for _ in range(attempts):
         # print(randint(1,6))
         results_list.append(randint(1,6))
     return results_list
 
 attempts = int(input('Quantas vezes voce quer girar o dado? '))
-print(dice(attempts))
+# print(dice(attempts))
 
-# results = dice(attempts) #results = results_list
-# for index, n in enumerate(results):
-#     print(f"Dice attempt:{index+1} had the result of {n}.")
+results = dice(attempts) #results = results_list
+for index, n in enumerate(results):
+    print(f"Dice attempt:{index+1} had the result of {n}.")
     
 
 

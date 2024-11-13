@@ -2,6 +2,9 @@
 # a. Imprima o resultado da soma de todos os valores da matriz no terminal;
 # b. E, criei uma nova matriz B, no qual cada item seja o valor da matriz A * 3;
 
+#matriz a = [[1,2,3],[4,5,6],[7,8,9]]
+# matrix = [1,2,3,4,5,6,7,8,9,10]
+
 from random import randint
 from copy import deepcopy
 import numpy as np
@@ -12,8 +15,12 @@ soma_total = 0
 
 # matriz_a = [[randint(0,10) for _ in range(10)] for _ in range (10)]
 for _ in range(10):
+    #2
     for i in range (10):
+        #10
+        #matriz_temp = []
         matriz_temp.append(randint(0,10))
+        #matriz_temp = [1,6,8,2,1,3,6,8,9]
     matriz_a.append(matriz_temp)
     matriz_temp = []
 
@@ -23,7 +30,7 @@ for linha in matriz_a:
     for valor in linha:
         soma_total += valor
 
-matriz_b = deepcopy(matriz_a)
+matriz_b = matriz_a
 
 # matriz_b = [[valor for valor in linha] for linha in matriz_a]
 

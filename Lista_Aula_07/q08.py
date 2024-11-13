@@ -10,10 +10,10 @@ def binary(num):
         #num%2 = 1 >>>> lista
         num = num // 2        
         
-    return binary_list[5:0:-1]
+    # return binary_list[::-1]
     # print(reversed(binary_list))
     
-    # return ''.join(str(bit) for bit in reversed(binary_list))
+    return ''.join(str(bit) for bit in reversed(binary_list))
 
 numb = int(input("Digite o numero a ser convertido para binario: "))
 print(binary(numb))

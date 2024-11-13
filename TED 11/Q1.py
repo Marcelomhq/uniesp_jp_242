@@ -6,7 +6,7 @@ VET = []
 posicoes = set()
 
 def receive_numbers():
-    for _ in range(10):
+    for o in range(10):
         number = int(input("Enter a number: "))
         
         if number in VET:
