@@ -1,6 +1,6 @@
 import requests
 from lib_classes import Slip
-import inflect
+
 import json
 
 url = "https://api.adviceslip.com/advice"
@@ -8,11 +8,11 @@ url = "https://api.adviceslip.com/advice"
 def scrapping_func(numb_quotes = 1):
 
     slips = []
-    p = inflect.engine()
+
 
     for i in range(numb_quotes):
        res = requests.get(url)
-       print(f"{p.ordinal(i+1)} scrapping '{url}'")
+       print(f"{i} scrapping '{url}'")
        slip_data = res.text.replace('{"slip": { ','').replace('}}','')
        slip_dict = json.loads("{"+slip_data+"}")
 

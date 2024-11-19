@@ -3,10 +3,13 @@ import functions
 import tkinter as tk
 from tkinter import messagebox,simpledialog
 import os
+import lib_classes
 
 app = tk.Tk()
 app.title("Seu Zé: Conselhos Digitais para um Negócio Arretado!")
 app.geometry("600x300")
+button_width = 50
+extra_menu_button_width = 35
 
 advices_data = None
 
@@ -38,8 +41,12 @@ def retrieve_advices():
     else:
         advices_data = functions.retrieving_json_info()
         if advices_data:
-            formatted_advices = "\n".join([f"ID: {advices["id"]}, Advice: '{advices["advice"]}'" for advices in advices_data])        
-            messagebox.showinfo("Mostrando conselhos salvos anteriormente" ,f"{formatted_advices}")
+            formatted_advices = "\n".join(
+                [f"ID: {advices["id"]}, Advice: '{advices["advice"]}'" for advices in advices_data]
+                )        
+            messagebox.showinfo(
+                "Mostrando conselhos salvos anteriormente" ,f"{formatted_advices}"
+                )
             #colocando isso aqui so pq tava dando bug com chamava opcao 3 e dps a 2. futuramente vou resolver
             advices_data = None
 
@@ -68,22 +75,42 @@ def extra_menu():
     extra_menu.title("Menu de traducao")
     extra_menu.geometry('400x300')
 
-    tk.Label(extra_menu, text="Funcionalidades de traducao", font=("Arial",16)).pack(pady=10)
+    tk.Label(
+        extra_menu, text="Funcionalidades de traducao", font=("Arial",16)
+        ).pack(pady=10)
 
-    tk.Button(extra_menu, text="1. Traduzir que estao na memoria", command=retrieve_advices_translate).pack(pady=5)
-    tk.Button(extra_menu, text="2. Traduzir conselhos ja salvos", command=saved_advices_translate).pack(pady=5)
-    tk.Button(extra_menu, text="3. Voltar ao menu principal", command=extra_menu.destroy).pack(pady=5)
+    tk.Button(
+        extra_menu, text="1. Traduzir que estao na memoria",width=extra_menu_button_width, command=retrieve_advices_translate
+        ).pack(pady=5)
+    tk.Button(
+        extra_menu, text="2. Traduzir conselhos ja salvos",width=extra_menu_button_width, command=saved_advices_translate
+        ).pack(pady=5)
+    tk.Button(
+        extra_menu, text="3. Voltar ao menu principal",width=extra_menu_button_width, command=extra_menu.destroy
+        ).pack(pady=5)
 
 
 tk.Label(
     app, text=" Bem-Vindo a Missão Secreta da Cachaçaria do Seu Zé:\nConselhos Digitais para um Negócio Arretado!", font=("Arial", 16)
     ).pack(pady=10)
-tk.Button(app, text="1. Pegue novos conselhos aqui!!", command=fetch_advices).pack(pady=5)
-tk.Button(app, text="2. Salvar conselhos para o futuro!!", command=save_advices).pack(pady=5)
-tk.Button(app, text="3. Ler conselhos do passado!!", command=retrieve_advices).pack(pady=5)
-tk.Button(app, text="4. Deletar todos os conselhos salvos e comecar do zero!!", command=functions.delete_everything).pack(pady=5)
-tk.Button(app, text="5. Traduzir conselhos do ingles, caso voce nao saiba ingles", command=extra_menu).pack(pady=5)
-tk.Button(app, text="6. Sair", command=exit_app).pack(pady=5)
+tk.Button(
+    app, text="1. Pegue novos conselhos aqui!!",width=button_width, command=fetch_advices
+    ).pack(pady=5)
+tk.Button(
+    app, text="2. Salvar conselhos para o futuro!!",width=button_width, command=save_advices
+    ).pack(pady=5)
+tk.Button(
+    app, text="3. Ler conselhos do passado!!",width=button_width, command=retrieve_advices
+    ).pack(pady=5)
+tk.Button(
+    app, text="4. Deletar todos os conselhos salvos e comecar do zero!!",width=button_width, command=functions.delete_everything
+    ).pack(pady=5)
+tk.Button(
+    app, text="5. Traduzir conselhos do ingles, caso voce nao saiba ingles",width=button_width, command=extra_menu
+    ).pack(pady=5)
+tk.Button(
+    app, text="6. Sair",width=button_width, command=exit_app
+    ).pack(pady=5)
 
 if __name__ == "__main__":
     app.mainloop()

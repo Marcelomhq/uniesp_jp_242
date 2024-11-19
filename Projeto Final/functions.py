@@ -64,7 +64,11 @@ def delete_everything():
             )
 
 def translate_from_english_memory(data):
-    print("memory")
+    formatted_advices_pt = "\n".join(
+        [f"ID: {advices.id}, Conselho: '{GoogleTranslator('en','pt').translate(advices.advice)}'" for advices in data]
+        )  
+    messagebox.showinfo("Conselhos traduzidos" ,f"{formatted_advices_pt}")
+    
 def translate_from_english_json():
     existing_data = retrieving_json_info()
     formatted_advices_pt = "\n".join(
