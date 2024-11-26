@@ -4,12 +4,20 @@ import tkinter as tk
 from tkinter import messagebox,simpledialog
 import os
 import lib_classes
+import menu_boxes
+
 
 app = tk.Tk()
 app.title("Seu Zé: Conselhos Digitais para um Negócio Arretado!")
-app.geometry("600x300")
+app.geometry("650x350")
 button_width = 50
 extra_menu_button_width = 35
+
+icon_image = tk.PhotoImage(file="Logo.png")
+app.iconphoto(False,icon_image)
+
+label = tk.Label(app, text="© Made by MarceloHQ", font=("Arial", 10), fg="black")
+label.place(relx=1.0, rely=1.0, anchor="se")
 
 advices_data = None
 
@@ -24,7 +32,7 @@ def save_advices():
     global advices_data
     if advices_data:
         functions.json_file(advices_data,'xddd.json')
-        messagebox.showinfo("Salvar Conselhos", "Seus conselhos foram salvos com sucesso!")
+        menu_boxes.custom_message_box("Salvar Conselhos", "Seus conselhos foram salvos com sucesso!")
         advices_data = None
     else:
         messagebox.showerror(
@@ -74,6 +82,9 @@ def extra_menu():
     extra_menu = tk.Toplevel(app)
     extra_menu.title("Menu de traducao")
     extra_menu.geometry('400x300')
+
+    extra_menu.transient(app)
+    extra_menu.grab_set()
 
     tk.Label(
         extra_menu, text="Funcionalidades de traducao", font=("Arial",16)
