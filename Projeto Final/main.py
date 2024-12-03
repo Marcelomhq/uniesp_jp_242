@@ -1,9 +1,7 @@
-import scrapping
 import functions
 import tkinter as tk
-from tkinter import messagebox,simpledialog
+from tkinter import messagebox
 import os
-import lib_classes
 import menu_boxes
 
 
@@ -21,6 +19,7 @@ label.place(relx=1.0, rely=1.0, anchor="se")
 
 advices_data = None
 
+
 def fetch_advices():
     global advices_data
     try:
@@ -35,7 +34,7 @@ def save_advices():
         menu_boxes.custom_message_box("Salvar Conselhos", "Seus conselhos foram salvos com sucesso!")
         advices_data = None
     else:
-        messagebox.showerror(
+        menu_boxes.custom_message_box(
             "Erro", "Voce precisa primeiro pegar conselhos antes de salvá-los!"
             )
 
@@ -43,7 +42,7 @@ def retrieve_advices():
     global advices_data
 
     if advices_data:
-        messagebox.showinfo(
+        menu_boxes.custom_message_box("Erro",
             "Voce ja tem conselhos salvos na memoria, por genteliza salve-os antes de pegar os conselhos salvos"
             )
     else:
@@ -52,7 +51,7 @@ def retrieve_advices():
             formatted_advices = "\n".join(
                 [f"ID: {advices["id"]}, Advice: '{advices["advice"]}'" for advices in advices_data]
                 )        
-            messagebox.showinfo(
+            menu_boxes.custom_message_box(
                 "Mostrando conselhos salvos anteriormente" ,f"{formatted_advices}"
                 )
             #colocando isso aqui so pq tava dando bug com chamava opcao 3 e dps a 2. futuramente vou resolver
@@ -62,7 +61,7 @@ def retrieve_advices_translate():
     if advices_data:
         functions.translate_from_english_memory(advices_data)
     else:
-        messagebox.showerror(
+        menu_boxes.custom_message_box(
             "Erro", "Voce nao tem conselhos na memoria entao como quer traduzi-los???? Va pegar conselho omii!!!!"
             )
 
@@ -70,7 +69,7 @@ def saved_advices_translate():
     if os.path.exists(functions.json_path):
         functions.translate_from_english_json()
     else:
-        messagebox.showerror(
+        menu_boxes.custom_message_box(
             "Erro", "Voce nao tem conselhos salvos nesse computador entao como quer traduzi-los???? Va pegar conselho e depois salvar-los antes de vir aqui omii!!!!"
             )
 
@@ -83,8 +82,15 @@ def extra_menu():
     extra_menu.title("Menu de traducao")
     extra_menu.geometry('400x300')
 
+    icon_image = tk.PhotoImage(file="Logo.png")
+    extra_menu.iconphoto(False,icon_image)
+
     extra_menu.transient(app)
     extra_menu.grab_set()
+    
+    x = (extra_menu.winfo_screenwidth() - extra_menu.winfo_width()) // 2
+    y = (extra_menu.winfo_screenheight() - extra_menu.winfo_height()) // 2
+    extra_menu.geometry(f"+{x}+{y}")
 
     tk.Label(
         extra_menu, text="Funcionalidades de traducao", font=("Arial",16)
@@ -120,7 +126,10 @@ tk.Button(
     app, text="5. Traduzir conselhos do ingles, caso voce nao saiba ingles",width=button_width, command=extra_menu
     ).pack(pady=5)
 tk.Button(
-    app, text="6. Sair",width=button_width, command=exit_app
+    app, text="6. Sobre este programa.",width=button_width, command=functions.About
+    ).pack(pady=5)
+tk.Button(
+    app, text="7. Sair",width=button_width, command=exit_app
     ).pack(pady=5)
 
 if __name__ == "__main__":

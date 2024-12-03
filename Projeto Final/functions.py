@@ -3,8 +3,10 @@ from scrapping import scrapping_func
 import json
 import os
 from deep_translator import GoogleTranslator
+import menu_boxes
 
 json_path = "xddd.json"
+flag_path = "pt-br-flag.png"
 
 def get_advices():
     
@@ -18,7 +20,7 @@ def get_advices():
        
         advices = scrapping_func(numb_quotes=numb_advices)
         formatted_advices = "\n".join([f"ID: {slip.id}, Advice: '{slip.advice}'" for slip in advices])
-        messagebox.showinfo(
+        menu_boxes.custom_message_box(
             "Conselhos Coletados",
             f"Pegamos {numb_advices} conselhos pra você!\n\n{formatted_advices}"
             )
@@ -48,18 +50,18 @@ def retrieving_json_info(file_path = json_path):
                 existing_data = json.load(file)
                 return existing_data    
     except (TypeError,FileNotFoundError):
-        messagebox.showerror(
+        menu_boxes.custom_message_box(
             "Error","Algo deu errado com o arquivo, talvez voce nao tenha ele criado ainda. Por favor tente pegar conselhos e salvo-los antes."
             )
 
 def delete_everything():
     if os.path.exists(json_path):
         os.remove(json_path)
-        messagebox.showinfo(
+        menu_boxes.custom_message_box(
             "Deletando conselhos" ,"Dando tchau pros conselhos passados"
             )
     else:
-        messagebox.showinfo(
+        menu_boxes.custom_message_box(
             "Erro" ,"Voce nao tem nenhum conselho salvo, entao como voce quer deleta-los?????"
             )
 
@@ -67,15 +69,17 @@ def translate_from_english_memory(data):
     formatted_advices_pt = "\n".join(
         [f"ID: {advices.id}, Conselho: '{GoogleTranslator('en','pt').translate(advices.advice)}'" for advices in data]
         )  
-    messagebox.showinfo("Conselhos traduzidos" ,f"{formatted_advices_pt}")
+    menu_boxes.custom_message_box("Conselhos traduzidos" ,f"{formatted_advices_pt}",flag_path)
     
 def translate_from_english_json():
     existing_data = retrieving_json_info()
     formatted_advices_pt = "\n".join(
         [f"ID: {advices["id"]}, Conselho: '{GoogleTranslator('en','pt').translate(advices['advice'])}'" for advices in existing_data]
         )  
-    messagebox.showinfo("Conselhos traduzidos" ,f"{formatted_advices_pt}")
+    menu_boxes.custom_message_box("Conselhos traduzidos" ,f"{formatted_advices_pt}",flag_path)
 
+def About():
+    menu_boxes.custom_message_box("Info sobre este software" ,"Este programa foi feito usando por Marcelo Honorato Queiroga como Projeto Final da matéria de Introdução a Programa, ministrada pelo Professor Messias Batista, para o curso de Sistemas para Internet, turno Noite. Interface feita utilizando TkInter.")
 
 
     
